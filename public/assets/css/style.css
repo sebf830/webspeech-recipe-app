@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #ecf0f1;
+}
+
+.error {
+    color: #e74c3c;
+    text-align: center;
+    display: none;
+}
+
+.start {
+    padding: 12px 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 9px 10px 18px 4px rgba(0, 0, 0, 0.2);
+    background-color: #3498db;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: 0.1s all;
+    position: absolute;
+    top: 30%;
+}
+
+.start :active {
+    transform: translateY(2px);
+    box-shadow: 9px 5px 12px 4px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.2rem 0.5rem;
+    background-color: #fff;
+    width: 100%;
+    position: absolute;
+    bottom: 55%;
+}
+
+.position {
+    position: fixed;
+    bottom: 0;
+    margin-top: 90px;
+    background-color: #ededed;
+}
+
+#displayResult {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    background-color: white;
+    width: 85%;
+    min-height: 200px;
+    margin-top: 15px;
+    margin-bottom: 150px;
+}
+
+.ingredient_section, .recipe_section {
+    margin-top: 50px;
+}
+
+.container .fa-microphone, .container .fa-microphone .listening {
+    color: #3498db;
+    animation: blink 2s infinite;
+}
+
+.command {
+    font-size: 16px;
+    margin-top: 1rem;
+}
+
+.title_command {
+    font-size: 16px;
+    margin-top: 1rem;
+}
+
+ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+ul li {
+    font-size: 16px;
+}
+
+.popup {
+    font-size: 12px;
+    color: #747474;
+    margin-top: 2rem;
+}
+
+.info {
+    font-size: 12px;
+    color: #747474;
+    position: fixed;
+    bottom: 10px;
+    text-align: center;
+}
+
+.info a {
+    text-decoration: none;
+    font-size: 14px !important;
+    color: #3498db;
+}
+
+.image_rslt {
+    transition: all 1s ease;
+}
+
+.scale {
+    transform: scale(1.25);
+}
+
+@media screen and (max-width: 700px) {
+    .container {
+        width: 80%;
+    }
+}
+
+@keyframes blink {
+    to {
+        color: #000;
+        transform: scale(1.02);
+    }
+}

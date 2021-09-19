@@ -129,7 +129,7 @@ recognition.onresult = event => {
                 var json = JSON.parse(data);
                 for (element of json.category) {
                     var card = '<div class="card">' +
-                        '<img src="' + element.image + '" alt="">' +
+                        '<img src="' + element.image + '" alt="" >' +
                         '<h4>' + element.dish_name + '</h4>' +
                         '</div>';
                     $('.item').append(card)
@@ -275,13 +275,16 @@ recognition.onresult = event => {
 //Declaring elements
 const start = document.querySelector(".start"),
     main = document.querySelector(".container"),
-    icon = document.querySelector(".fa-microphone");
+    icon = document.querySelector(".fa-microphone"),
+    main_nav = document.querySelector(".main_nav");
+
 
 start.addEventListener("click", function () {
     // Show bot
     main.style.display = "flex";
+    main_nav.style.display = "none";
     this.style.display = "none";
-
+    $('.body').removeClass('background')
     // Start recognizing
     recognition.start();
 });

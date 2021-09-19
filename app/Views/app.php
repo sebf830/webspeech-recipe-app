@@ -21,17 +21,25 @@
     <link href="<?= base_url('public/assets/css/style.css') ?>" rel="stylesheet" type="text/css" media="all" />
 </head>
 
-<body>
+<body class="background body">
 
     <h1 class="error">
         L'outil de reconaissance n'est pas supporté sur votre navigateur, essayez d'utiliser CHROME ou FIREFOX
     </h1>
 
-    <button class="start">
-        commencer &nbsp;<i class="fa fa-comments"></i>
-    </button>
 
-    <!-- 
+    <div class="main_nav">
+        <h1>MIJOTONS</h1>
+        <h3>VOTRE AIDE CULINAIRE </h3>
+        <div class="button-awesome">
+            <button class="btn btn-half start">Cuisinez &nbsp;<i class="fa fa-comments"></i></button>
+            <a href="<?= base_url('rechercher') ?>" class=" btn btn-full">Ma collection de recette&nbsp;<i class="fas fa-download"></i></i></a>
+        </div>
+    </div>
+
+
+
+
     <div id="displayResult" class="displayResult">
         <h3 class="title_result"></h3>
         <br>
@@ -55,14 +63,14 @@
 
     <div class="container">
         <!-- Recognized voice -->
-    <div class="block_command" style="text-align:center;width:60%;">
-        <h5 class="title_command ">Commandes vocales disponibles</h5>
-        <ul id="list_commands"> </ul>
-    </div>
-    <div style="text-align:center">
-        <i class="fa fa-microphone fa-2x"></i>
-        <h3 class="command"></h3>
-    </div>
+        <div class="block_command" style="text-align:center;width:60%;">
+            <h5 class="title_command ">Commandes vocales disponibles</h5>
+            <ul id="list_commands"> </ul>
+        </div>
+        <div style="text-align:center">
+            <i class="fa fa-microphone fa-2x"></i>
+            <h3 class="command"></h3>
+        </div>
     </div>
 
     <script src="<?= base_url('public/assets/js/app.js') ?>"> </script>

@@ -169,7 +169,7 @@
                     <div class="header-front"></div>
                     <span class=" card-title"></span>
                 </div>
-                <h5 style="text-align:center">Les ingrédients</h5>
+                <h5 class="title_ingrédient">Les ingrédients</h5>
                 <div class="card-content content_ingredients">
                 </div>
                 <span class="message_flip">Cliquer sur la carte pour afficher le verso</span>

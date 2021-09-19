@@ -1,56 +1,42 @@
-# CodeIgniter 4 Framework
+# MIJOTONS : l'application vocale pour la cuisine
 
-## What is CodeIgniter?
-
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
-
-This repository holds the distributable version of the framework,
-including the user guide. It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
-
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
-
-The user guide corresponding to this version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+## A propos de l'application
+Mijotons est un assistant vocal destiné à aider le cuisinier en production.
+Il est possible de consulter et naviguer sur une fiche technique sans toucher et salir son appareil.
 
 
-## Important Change with index.php
+![Alt text](https://github.com/sebf830/Mijotons---Your-cooking-assistant//blob/master/public/images/capture1.png)
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## Description de l'application
+L'application permet de "scrapper" les recettes du site Marmiton : 
+- Cherchez une recette en renseignant un lien.
+- Ajouter la recette à votre collection.
 
-**Please** read the user guide for a better explanation of how CI4 works!
+Consultez vos recettes à la voix : 
+- Choisissez vos catégories ou vos recettes
+- Vous vous faites dicter les ingrédients ou les étapes de la recette.
+- Vous demandez le nombre de personnes, l'assistant calcul les quantités pour vous.
 
-## Repository Management
 
-We use Github issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+![Alt text](https://github.com/sebf830/Mijotons---Your-cooking-assistant//blob/master/public/images/capture2.png)
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
 
-## Contributing
+## Comment utiliser l'application?
 
-We welcome contributions from the community.
+Dans le fichier app/config/App.php, changer la variable $base_url pour le chemin de votre projet.
+Créer une base de donnée puis importer le fichier SQL du projet.
+Dans le fichier app/config/Database.php, mofidier la variable $default et renseigner votre hostname, vos identifiants de BDD, lle port.
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+## Descriptif technique
+Le projet est réalisée avec Codeigniter 4, Javascript et Jquery, HTML, CSS, BDD SQL.
+Une version de PHP 7.3 ou supérieure est nécessaire pour utiliser cette application.
 
-## Server Requirements
+![Alt text](https://github.com/sebf830/Mijotons---Your-cooking-assistant//blob/master/public/images/capture3.png)
 
-PHP version 7.3 or higher is required, with the following extensions installed:
+Toute remarque, suggestion, correction, critique est la bienvenue!
+Enjoy!
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+seb.flouvat@gmail.com
 
-Additionally, make sure that the following extensions are enabled in your PHP:
 
-- json (enabled by default - don't turn it off)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
-- xml (enabled by default - don't turn it off)

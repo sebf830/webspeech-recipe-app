@@ -44,7 +44,7 @@ class DishModel extends Model
 	{
 		$builder = $this->db->table('dish');
 		$builder->select('*');
-		$builder->like('dish.dish_name', $request);
+		$builder->like('dish_name', $request);
 		$data = $builder->get()->getRowArray();
 		return $data;
 	}
@@ -73,5 +73,35 @@ class DishModel extends Model
 		$builder->where('category', $categpry);
 		$starters = $builder->get()->getResultArray();
 		return $starters;
+	}
+
+	public function create_dish($data)
+	{
+		$builder = $this->db->table('dish');
+		$builder->select('*');
+		$builder->where('dish_name', $data['dish_name']);
+		if (!$builder->get()->getRow()) {
+			$builder->set($data)->insert();
+		}
+	}
+	public function create_etape($data)
+	{
+		$builder = $this->db->table('etape');
+		$builder->select('*');
+		$builder->where('etape_content', $data['etape_content']);
+		$builder->where('dish_id', $data['dish_id']);
+		if (!$builder->get()->getRow()) {
+			$builder->set($data)->insert();
+		}
+	}
+	public function create_ingredient($data)
+	{
+		$builder = $this->db->table('ingredients');
+		$builder->select('*');
+		$builder->where('ingredient_name', $data['ingredient_name']);
+		$builder->where('dish_id', $data['dish_id']);
+		if (!$builder->get()->getRow()) {
+			$builder->set($data)->insert();
+		}
 	}
 }

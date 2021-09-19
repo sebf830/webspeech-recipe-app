@@ -189,7 +189,7 @@ ul li {
 /******* search form ***********/
 
 .search_container {
-    width: 60%;
+    width: 66%;
     height: 25vh;
     border: 1px solid #ededed;
     margin: 0 auto;
@@ -201,7 +201,7 @@ ul li {
 }
 
 .search_recipe_form {
-    width: 80%;
+    width: 75%;
     margin: 15px auto;
 }
 
@@ -248,6 +248,22 @@ ul li {
     bottom: 0;
     font-size: 14px;
     font-style: italic;
+}
+
+.options_search {
+    display: none;
+}
+
+.options_btn {
+    padding: 4px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: 0.1s all;
 }
 
 @media screen and (max-width: 700px) {

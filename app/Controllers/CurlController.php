@@ -27,16 +27,23 @@ class CurlController extends BaseController
                 $paragraphs = $xpath->query("//*[@class and contains(concat(' ', normalize-space(@class), ' '), 'Stepsstyle__Text-sc-1el6pkn-3')]");
                 $title_h3s = $xpath->query("//*[@class and contains(concat(' ', normalize-space(@class), ' '), 'Stepsstyle__StepTitle-sc-1el6pkn-1')]");
                 $tag_imgs = $xpath->query("//*[@class and contains(concat(' ', normalize-space(@class), ' '), 'Picturestyle__PictureImg-dy77ha-0')]");
-
-
-
-
                 $title_h1 = $dom->getElementsByTagName('h1');
                 $qtes = $xpath->query("//*[@class and contains(concat(' ', normalize-space(@class), ' '), 'eYSThb')]");
                 $ingredients = $xpath->query("//*[@class and contains(concat(' ', normalize-space(@class), ' '), 'dDuSlh')]");
+                $category = $xpath->query("//*[@class and contains(concat(' ', normalize-space(@class), ' '), 'iYuJQV')]");
+
+                $category_tab = [];
+                foreach ($category as $cat) {
+                    $cat_text = htmlentities($cat->textContent);
+                    $cat_text = str_replace('&gt;', '', $cat_text);
+
+                    $cati = explode('&nbsp;', $cat_text);
+                    $category_name = $this->check_category($cati);
+                    $category_tab = ['name' =>  $category_name];
+                }
+
 
                 $recipe = [];
-
                 //titre de la recette
                 foreach ($title_h1 as $h1) {
                     $h1_text = $h1->textContent;
@@ -106,15 +113,61 @@ class CurlController extends BaseController
                 $ingredient = ['ingredients' => $array_ingredients];
                 $recipe_array = array_merge($allRecipe, $ingredient);
 
-                echo json_encode(array('recipe' => $recipe_array));
+                if ($this->request->getVar('action')) {
+                    $dish = new DishModel();
+
+                    $data_requested_dish = [
+                        "dish_name" => $recipe['title'],
+                        "quantity" => $recipe['personnes'],
+                        "image" => $img_array[0],
+                        "category" => $category_tab['name']
+                    ];
+
+                    $dish->create_dish($data_requested_dish);
+                    $current_dish = $dish->getDishDatas($recipe['title']);
+
+                    for ($i = 1; $i <= count($h3_array); $i++) {
+                        $data_etape_dish = [
+                            "etape_content" => $p_array[$i],
+                            "etape_number" => $i,
+                            "dish_id" => $current_dish['dish_id']
+                        ];
+                        $dish->create_etape($data_etape_dish);
+                    }
+
+                    for ($i = 1; $i <= count($qte_array); $i++) {
+
+                        $conditionnement = str_replace(' ', '', preg_replace('`[0-9]`sm', '', trim($qte_array[$i])));
+                        $number_qte = str_replace(' ', '', preg_replace('/[^0-9]/', '', trim($qte_array[$i])));
+
+                        $data_igredients_dish = [
+                            "ingredient_name" => $ingredient_array[$i],
+                            "ingredient_quantity" => $number_qte,
+                            "conditionnement" => $conditionnement,
+                            "dish_id" => $current_dish['dish_id']
+                        ];
+                        $dish->create_ingredient($data_igredients_dish);
+                    }
+
+
+
+                    echo json_encode(array('success' => 'enregistré en base de donnée'));
+                } else {
+
+                    echo json_encode(array('recipe' => $recipe_array));
+                }
             }
         }
     }
+
+    public function check_category(array $array)
+    {
+        if (in_array('Plat principal', $array) || in_array('Plat unique', $array)) {
+            return 'main';
+        } else if (in_array('Entrée', $array) || in_array('Entr&eacute;e', $array)) {
+            return 'starters';
+        } else if (in_array('Dessert', $array)) {
+            return 'dessert';
+        }
+    }
 }
-// https://assets.afcdn.com/recipe/20160610/7950_w96h144c1cx2000cy3000.webp 96w,
-//  https://assets.afcdn.com/recipe/20160610/7950_w128h192c1cx2000cy3000.webp 128w,
-//  https://assets.afcdn.com/recipe/20160610/7950_w320h480c1cx2000cy3000.webp 320w, 
-// https://assets.afcdn.com/recipe/20160610/7950_w420h630c1cx2000cy3000.webp 420w, 
-// https://assets.afcdn.com/recipe/20160610/7950_w768h1152c1cx2000cy3000.webp 768w, 
-// https://assets.afcdn.com/recipe/20160610/7950_w1024h1536c1cx2000cy3000.webp 1024w, 
-// https://assets.afcdn.com/recipe/20160610/7950_w1200h1800c1cx2000cy3000.webp 1200w

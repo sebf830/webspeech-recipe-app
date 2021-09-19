@@ -36,6 +36,7 @@ $routes->get('/speech', 'HomeController::speech');
 $routes->post('/search_dish', 'RecipeController::search_dish');
 $routes->post('/search_url', 'CurlController::search_url');
 $routes->post('/category', 'RecipeController::category');
+$routes->post('/add_recipe_collection', 'RecipeController::add_recipe_collection');
 
 $routes->get('/rechercher', 'RecipeController::form_url_search');
 

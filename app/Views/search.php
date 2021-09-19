@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="description" content="The small framework with powerful features">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>speech</title>
+    <title>Mijotons - Recherche</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -19,15 +19,22 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <!-- css -->
     <link href="<?= base_url('public/assets/css/style.css') ?>" rel="stylesheet" type="text/css" media="all" />
+    <link rel="shortcut icon" href="<?= base_url('public/images/toque.ico') ?>" type="image/x-icon" />
 
     <style>
+        .row {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
         .flipper {
             position: absolute;
             top: 33%;
-            left: 25%;
-            right: 25%;
+            left: 24%;
             margin-bottom: 50px;
             display: none;
+            z-index: 0;
         }
 
         .flipper {
@@ -87,8 +94,8 @@
         }
 
         .card {
-            width: 750px;
-            min-height: 95vh;
+            width: 100%;
+            min-height: 100vh;
             margin-top: 10px;
             box-sizing: border-box;
             border-radius: 2px;
@@ -115,8 +122,8 @@
             background-clip: padding-box;
             position: relative;
             z-index: -1;
-            width: 1000px;
-            height: 310px;
+            width: 120%;
+            height: 330px;
         }
 
         .card .card-image span.card-title {
@@ -155,25 +162,32 @@
         </form>
     </div>
 
-    <div class="row anchor_recipe_card" style="height:130vh">
+    <div class="row anchor_recipe_card" style="height:132vh">
         <div class="flipper col-md-6 col-md-offset-3 flip_card">
             <div class="front-card card">
                 <div class="card-image">
                     <div class="header-front"></div>
                     <span class=" card-title"></span>
                 </div>
+                <h5 style="text-align:center">Les ingrédients</h5>
                 <div class="card-content content_ingredients">
                 </div>
                 <span class="message_flip">Cliquer sur la carte pour afficher le verso</span>
+
             </div>
             <div class="back-card card">
 
                 <div class="card-content content_steps">
-                    <span class="message_flip">Cliquer sur la carte pour afficher le recto</span>
 
                 </div>
+                <span class="message_flip">Cliquer sur la carte pour afficher le recto</span>
             </div>
         </div>
+    </div>
+    <br>
+    <div class="options_search">
+        <button type="button" class="options_btn" id="add_collection">Ajouter à ma collection</button>&nbsp;&nbsp;
+        <button type="button" class="options_btn" id="new_search">Nouvelle recherche</button>
     </div>
 
 

@@ -61,4 +61,9 @@ class RecipeController extends BaseController
     {
         return view('search');
     }
+
+    public function add_recipe_collection()
+    {
+        echo json_encode(array('succes' => 'c\'est réussi'));
+    }
 }

@@ -66,10 +66,11 @@ class DishModel extends Model
 		$data = $builder->get()->getResultArray();
 		return $data;
 	}
-	public function getStarters()
+	public function getDishByCategory($categpry)
 	{
 		$builder = $this->db->table('dish');
 		$builder->select('*');
+		$builder->where('category', $categpry);
 		$starters = $builder->get()->getResultArray();
 		return $starters;
 	}

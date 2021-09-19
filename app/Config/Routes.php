@@ -31,10 +31,14 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->get('/speech', 'Home::speech');
-$routes->post('/search_dish', 'Home::search_dish');
-$routes->post('/starters', 'Home::starters');
+$routes->get('/', 'HomeController::index');
+$routes->get('/speech', 'HomeController::speech');
+$routes->post('/search_dish', 'RecipeController::search_dish');
+$routes->post('/search_url', 'CurlController::search_url');
+$routes->post('/category', 'RecipeController::category');
+
+$routes->get('/rechercher', 'RecipeController::form_url_search');
+
 
 
 

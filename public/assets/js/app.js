@@ -11,12 +11,12 @@ if (
         window.webkitSpeechRecognition ||
         window.mozSpeechRecognition ||
         window.msSpeechRecognition)();
-
     recognition.continuous = true;
 
 
+
     var commandList = document.getElementById('list_commands');
-    commandList.innerHTML = "<li>Dites le nom d'un plat</li>"
+    commandList.innerHTML = '<li>"entrées", "plats", "desserts" ou dites le nom d\'un plat</li>'
 } else {
     // speech recognition API not supported
     console.error("error");
@@ -32,54 +32,144 @@ recognition.onresult = event => {
     let text = speechToText.transcript;
     console.log(text)
 
-
     document.querySelector(".command").innerHTML = "\'" + text + "\'";
 
 
-    if (text == 'entrées' || text == 'entrée' || text == 'entree') {
+    if (text.trim() == 'entrées' || text.trim() == 'entrée' || text.trim() == 'entree') {
         speak('La liste des  entrées')
+        $('#displayCategories').fadeIn('slow')
+        $('#displayResult').hide()
+        $('.container').addClass('position');
+        $('.title_category').html('Les entrées')
+        $('.item').html('')
+
+        $('#list_commands').html('');
+        $('#list_commands').html('<li>"plats", "desserts", "descendre", "remonter" ou dites le nom d\'un plat</li>');
+
+
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8888/CI/mijotons/starters',
+            url: 'http://localhost:8888/CI/mijotons/category',
             data: {
-                request: 'starters'
+                category: 'starters'
             },
             datatype: 'JSON',
             success: function (data) {
-
+                var json = JSON.parse(data);
+                for (element of json.category) {
+                    var card = '<div class="card">' +
+                        '<img src="' + element.image + '" alt="">' +
+                        '<h4>' + element.dish_name + '</h4>' +
+                        '</div>';
+                    $('.item').append(card)
+                }
             }
         });
     }
-    else if (text == 'plat' || text == 'plats' || text == 'pla') {
+    else if (text.trim() == 'descends', text.trim() == 'descendre' || text.trim() == 'descend' || text.trim() == 'descente') {
+        var category_content = document.querySelector('.title_category').textContent
+        if (category_content != null || category_content != '') {
+            $("html, body").animate({ scrollTop: "+=680px" }, 800);
+        }
+    }
+    else if (text.trim() == 'remonter' || text.trim() == 'remonte' || text.trim() == 'remonté' ||
+        text.trim() == 'remonteé ' || text.trim() == 'remontés' || text.trim() == 'remontées') {
+        var category_content = document.querySelector('.title_category').textContent
+        if (category_content != null || category_content != '') {
+            $("html, body").animate({ scrollTop: "-=680px" }, 800);
+        }
+    }
+    else if (text.trim() == 'plat' || text.trim() == 'plats') {
         speak('Les liste des plats')
+        $('#displayCategories').fadeIn('slow')
+        $('#displayResult').hide()
+        $('.container').addClass('position');
+        $('.title_category').html('Les plats')
+        $('.item').html('')
 
+        $('#list_commands').html('');
+        $('#list_commands').html('<li>"entées", "desserts", "descendre", "remonter" ou dites le nom d\'un plat</li>');
+
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8888/CI/mijotons/category',
+            data: {
+                category: 'main'
+            },
+            datatype: 'JSON',
+            success: function (data) {
+                var json = JSON.parse(data);
+                for (element of json.category) {
+                    var card = '<div class="card">' +
+                        '<img src="' + element.image + '" alt="">' +
+                        '<h4>' + element.dish_name + '</h4>' +
+                        '</div>';
+                    $('.item').append(card)
+                }
+            }
+        });
     }
     else if (text == 'dessert' || text == 'desserts') {
+        $('#displayCategories').fadeIn('slow')
+        $('#displayResult').hide()
+        $('.container').addClass('position');
+        $('.title_category').html('Les desserts')
+        $('.item').html('')
+
+        $('#list_commands').html('');
+        $('#list_commands').html('<li>"entrées", "plats", "descendre", "remonter" ou dites le nom d\'un plat</li>');
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8888/CI/mijotons/category',
+            data: {
+                category: 'dessert'
+            },
+            datatype: 'JSON',
+            success: function (data) {
+                var json = JSON.parse(data);
+                for (element of json.category) {
+                    var card = '<div class="card">' +
+                        '<img src="' + element.image + '" alt="">' +
+                        '<h4>' + element.dish_name + '</h4>' +
+                        '</div>';
+                    $('.item').append(card)
+                }
+            }
+        });
         speak('Les liste des desserts')
 
     }
 
     else if (text.includes('personne') || text.includes('personnes') || text.includes('person')) {
         var nombre = text.substr(0, 2)
-        var base = document.querySelector('.qty_dish').textContent
+        if (nombre != null || nombre != '') {
+            var base = document.querySelector('.qty_dish').textContent
 
-        speak(`recette pour ${nombre} personnes`)
+            speak(`recette pour ${nombre} personnes`)
 
-        $('.title_ingrédient').html('')
-        $('.title_ingrédient').append('Ingrédients pour <span class="qty_dish">' + nombre + '</span> personnes');
+            $('.title_ingrédient').html('')
+            $('.title_ingrédient').append('Ingrédients pour <span class="qty_dish">' + nombre + '</span> personnes');
 
+            speak(ingredients)
+            $('html, body').animate({
+                scrollTop: $("div.ingredient_section").offset().top
+            }, 1000)
 
-        var qty = document.querySelectorAll('.qty');
-        qty.forEach(item => {
-            var qty_ingredient = item.textContent
-            if (qty_ingredient != '') {
-                var factor = Number(nombre) / Number(base)
+            var qty = document.querySelectorAll('.qty');
+            qty.forEach(item => {
+                var qty_ingredient = item.textContent
+                if (qty_ingredient != '') {
+                    var factor = Number(nombre) / Number(base)
 
-                var total = Number(qty_ingredient) * Number(factor)
-                item.innerHTML = total
+                    var total = Number(qty_ingredient) * Number(factor)
+                    item.innerHTML = total
 
-            }
-        });
+                }
+            });
+        } else {
+            speak(`je n'ai pas compris`)
+
+        }
     }
 
     else if (text == 'image' || text == 'images') {
@@ -103,8 +193,13 @@ recognition.onresult = event => {
     }
     else if (text.includes('étape') || text.includes('étapes') || text.includes('etape') || text.includes('etapes')) {
         var step_number = text.substr(-1, 2)
-        var step = document.querySelector('.etape_no_' + step_number).textContent
+        var stepElement = document.querySelector('.etape_no_' + step_number)
+        var step = stepElement.textContent
         speak(step)
+
+        $('html, body').animate({
+            scrollTop: $("div.div_etape_" + step_number).offset().top
+        }, 1000)
 
     }
     else if (text == 'ingrédient' || text == 'ingrédients') {
@@ -119,6 +214,8 @@ recognition.onresult = event => {
         }
     }
     else {
+        recognition.continuous = true;
+
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8888/CI/mijotons/search_dish',
@@ -133,6 +230,7 @@ recognition.onresult = event => {
                 if (json.result.name != null) {
                     $('#displayResult').css('display', 'flex');
                     $('.container').addClass('position');
+                    $('#displayCategories').hide()
 
                     //titre recette
                     $('.title_result').html('');
@@ -197,9 +295,8 @@ function speak(text) {
 
     msg.onend = () => {
         console.log("fin de requete");
-        recognition.start();
         console.log("Nouvelle requete");
-
+        recognition.start();
     };
 
     window.speechSynthesis.speak(msg);
@@ -212,4 +309,6 @@ recognition.onstart = () => {
 };
 recognition.onend = () => {
     icon.classList.remove("listening");
+
 };
+

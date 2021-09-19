@@ -44,14 +44,21 @@
             <p id="ingrédients_result"></p>
         </div>
         <div class="recipe_section">
-            <h4 style="text-align:center;">Détail de la recette</h4>
+            <h4 style="text-align:center;margin-bottom:30px;">Détail de la recette</h4>
             <p id="recipe_result"></p>
+        </div>
+    </div>
+
+    <div id="displayCategories" class="displayCategories">
+
+        <h3 class="title_category" style="text-align:center"></h3>
+        <div class="item">
         </div>
     </div>
 
     <div class="container">
         <!-- Recognized voice -->
-        <div style="text-align:center">
+        <div class="block_command" style="text-align:center;width:60%;">
             <h5 class="title_command ">Commandes vocales disponibles</h5>
             <ul id="list_commands"> </ul>
         </div>

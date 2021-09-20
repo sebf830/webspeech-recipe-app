@@ -9,7 +9,7 @@ Il est possible de consulter et naviguer sur une fiche technique sans toucher et
 
 
 ## Description de l'application
-L'application permet de "scrapper" les recettes du site Marmiton : 
+L'application permet de "scrapper*" les recettes du site Marmiton : 
 - Cherchez une recette en renseignant un lien.
 - Ajouter la recette à votre collection.
 
@@ -33,6 +33,8 @@ Le projet est réalisée avec Codeigniter 4, Javascript et Jquery, HTML, CSS, BD
 Une version de PHP 7.3 ou supérieure est nécessaire pour utiliser cette application.
 
 ![Alt text](https://github.com/sebf830/Mijotons---Your-cooking-assistant/blob/master/public/images/capture3.png)
+
+Cette application est déstinée à un usage privé, pédagogique et/ou utilitaire. Les données du site ne doivent pas être utilisées à des fins commerciales ou faire l'objet de plagiat.
 
 Toute remarque, suggestion, correction, critique est la bienvenue!
 Enjoy!
